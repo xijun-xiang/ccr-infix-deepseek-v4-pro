@@ -6,7 +6,16 @@
       "api_key": "$ANTHROPIC_AUTH_TOKEN",
       "models": ["deepseek-v4-pro"],
       "transformer": {
-        "use": ["infix"]
+        "use": [
+          [
+            "infix",
+            {
+              "webToolsMode": "mcp",
+              "replayPlaceholderReasoning": true,
+              "stripBillingHeader": true
+            }
+          ]
+        ]
       }
     }
   ],

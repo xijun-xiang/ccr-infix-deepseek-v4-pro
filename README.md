@@ -8,13 +8,34 @@
 
 ## Unofficial Fork Notice
 
-This repository is an unofficial fork/modification of [musistudio/claude-code-router](https://github.com/musistudio/claude-code-router). It adds an Infix + DeepSeek V4 Pro transformer for Claude Code agent workflows.
+This repository is an unofficial fork/modification of [musistudio/claude-code-router](https://github.com/musistudio/claude-code-router). It adds an Infix + DeepSeek V4 Pro transformer for Claude Code agent workflows, plus optional local MCP web tools for third-party model routes.
 
 This project is not affiliated with, endorsed by, or sponsored by the original project maintainers or their sponsors. The original MIT license and copyright notice are retained in [LICENSE](LICENSE).
 
 > A powerful tool to route Claude Code requests to different models and customize any request.
 >
-> This fork focuses on compatibility with Infix + `deepseek-v4-pro` reasoning/tool-call loops.
+> This fork focuses on compatibility with Infix + `deepseek-v4-pro` reasoning/tool-call loops. See [README_INFIX_DEEPSEEK.md](README_INFIX_DEEPSEEK.md) for setup details.
+
+### Quick Start for This Fork
+
+Use the Infix-specific config from [README_INFIX_DEEPSEEK.md](README_INFIX_DEEPSEEK.md), keep your API key in `ANTHROPIC_AUTH_TOKEN`, and start Claude Code from the project directory you want it to work in:
+
+```powershell
+cd "D:\your-project"
+node "D:\path\to\claude-code-router\dist\cli.js" code
+```
+
+For web access with `deepseek-v4-pro`, do not rely on Claude Code's built-in `WebSearch`/`WebFetch`. This fork includes the local MCP server `scripts/cc-web-mcp.js`; after adding it to `~/.claude/settings.json`, ask Claude Code to use:
+
+- `ccr-local-web` `web_research` for search plus source-page fetching.
+- `ccr-local-web` `web_fetch` for opening a specific URL.
+- `ccr-local-web` `nba_scoreboard` for structured NBA scores by local date/timezone.
+
+Example prompt:
+
+```text
+Do not use built-in WebSearch or WebFetch. Use ccr-local-web web_research to search this topic, then cite the source URLs.
+```
 
 ![](blog/images/claude-code.png)
 

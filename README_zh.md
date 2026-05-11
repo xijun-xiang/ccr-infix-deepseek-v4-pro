@@ -8,13 +8,34 @@
 
 ## 非官方修改版声明
 
-本仓库是 [musistudio/claude-code-router](https://github.com/musistudio/claude-code-router) 的非官方 fork / 修改版，新增了面向 Infix + DeepSeek V4 Pro 的 transformer，用于适配 Claude Code agent 工作流。
+本仓库是 [musistudio/claude-code-router](https://github.com/musistudio/claude-code-router) 的非官方 fork / 修改版，新增了面向 Infix + DeepSeek V4 Pro 的 transformer，用于适配 Claude Code agent 工作流，并提供可选的本地 MCP 联网工具。
 
 本项目不隶属于原项目维护者，也不代表原项目维护者或其赞助商的官方背书。原 MIT 许可证与版权声明保留在 [LICENSE](LICENSE)。
 
 > 一个用于将 Claude Code 请求路由到不同模型，并自定义请求/响应转换的工具。
 >
-> 这个修改版重点解决 Infix + `deepseek-v4-pro` 在 reasoning/tool-call 循环中的兼容问题。
+> 这个修改版重点解决 Infix + `deepseek-v4-pro` 在 reasoning/tool-call 循环中的兼容问题。配置细节见 [README_INFIX_DEEPSEEK.md](README_INFIX_DEEPSEEK.md)。
+
+### 这个修改版的快速启动方式
+
+按 [README_INFIX_DEEPSEEK.md](README_INFIX_DEEPSEEK.md) 写入 Infix 专用配置，把 API key 放在本机环境变量 `ANTHROPIC_AUTH_TOKEN` 里，然后从你希望 Claude Code 工作的项目目录启动：
+
+```powershell
+cd "D:\your-project"
+node "D:\path\to\claude-code-router\dist\cli.js" code
+```
+
+使用 `deepseek-v4-pro` 时，不要依赖 Claude Code 内置的 `WebSearch` / `WebFetch`。本修改版内置了本地 MCP 脚本 `scripts/cc-web-mcp.js`；把它加入 `~/.claude/settings.json` 后，联网任务优先使用：
+
+- `ccr-local-web` 的 `web_research`：搜索并自动抓取前几个结果页，适合查实时信息并核对来源。
+- `ccr-local-web` 的 `web_fetch`：打开指定 URL。
+- `ccr-local-web` 的 `nba_scoreboard`：按本地日期和时区查询结构化 NBA 比分。
+
+示例提示词：
+
+```text
+不要使用内置 WebSearch 或 WebFetch。请使用 ccr-local-web 的 web_research 搜索并核对来源 URL。
+```
 
 ![](blog/images/claude-code.png)
 

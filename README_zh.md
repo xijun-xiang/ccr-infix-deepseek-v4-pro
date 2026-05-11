@@ -6,14 +6,15 @@
 
 <hr>
 
-![](blog/images/sponsors/glm-zh.jpg)
-> 本项目由 Z智谱 提供赞助, 他们通过 GLM CODING PLAN 对本项目提供技术支持。
-> GLM CODING PLAN 是专为AI编码打造的订阅套餐，每月最低仅需20元，即可在十余款主流AI编码工具如 Claude Code、Cline、Roo Code 中畅享智谱旗舰模型GLM-4.7（受限于算力，目前仅限Pro用户开放），为开发者提供顶尖的编码体验。
-> 智谱AI为本产品提供了特别优惠，使用以下链接购买可以享受九折优惠：https://www.bigmodel.cn/claude-code?ic=RRVJPB5SII
+## 非官方修改版声明
 
-> [从CLI工具风格看工具渐进式披露](/blog/zh/从CLI工具风格看工具渐进式披露.md)
+本仓库是 [musistudio/claude-code-router](https://github.com/musistudio/claude-code-router) 的非官方 fork / 修改版，新增了面向 Infix + DeepSeek V4 Pro 的 transformer，用于适配 Claude Code agent 工作流。
 
-> 一款强大的工具，可将 Claude Code 请求路由到不同的模型，并自定义任何请求。
+本项目不隶属于原项目维护者，也不代表原项目维护者或其赞助商的官方背书。原 MIT 许可证与版权声明保留在 [LICENSE](LICENSE)。
+
+> 一个用于将 Claude Code 请求路由到不同模型，并自定义请求/响应转换的工具。
+>
+> 这个修改版重点解决 Infix + `deepseek-v4-pro` 在 reasoning/tool-call 循环中的兼容问题。
 
 ![](blog/images/claude-code.png)
 
@@ -546,132 +547,3 @@ jobs:
 
 -   [项目动机和工作原理](blog/zh/项目初衷及原理.md)
 -   [也许我们可以用路由器做更多事情](blog/zh/或许我们能在Router中做更多事情.md)
-
-## ❤️ 支持与赞助
-
-如果您觉得这个项目有帮助，请考虑赞助它的开发。非常感谢您的支持！
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F31GN2GM)
-
-[Paypal](https://paypal.me/musistudio1999)
-
-<table>
-  <tr>
-    <td><img src="/blog/images/alipay.jpg" width="200" alt="Alipay" /></td>
-    <td><img src="/blog/images/wechat.jpg" width="200" alt="WeChat Pay" /></td>
-  </tr>
-</table>
-
-### 我们的赞助商
-
-非常感谢所有赞助商的慷慨支持！
-
-- [AIHubmix](https://aihubmix.com/)
-- [BurnCloud](https://ai.burncloud.com)
-- [302.AI](https://share.302.ai/ZGVF9w)
-- [Z智谱](https://www.bigmodel.cn/claude-code?ic=FPF9IVAGFJ)
-- @Simon Leischnig
-- [@duanshuaimin](https://github.com/duanshuaimin)
-- [@vrgitadmin](https://github.com/vrgitadmin)
-- @*o
-- [@ceilwoo](https://github.com/ceilwoo)
-- @*说
-- @*更
-- @K*g
-- @R*R
-- [@bobleer](https://github.com/bobleer)
-- @*苗
-- @*划
-- [@Clarence-pan](https://github.com/Clarence-pan)
-- [@carter003](https://github.com/carter003)
-- @S*r
-- @*晖
-- @*敏
-- @Z*z
-- @*然
-- [@cluic](https://github.com/cluic)
-- @*苗
-- [@PromptExpert](https://github.com/PromptExpert)
-- @*应
-- [@yusnake](https://github.com/yusnake)
-- @*飞
-- @董*
-- @*汀
-- @*涯
-- @*:-）
-- @**磊
-- @*琢
-- @*成
-- @Z*o
-- @\*琨
-- [@congzhangzh](https://github.com/congzhangzh)
-- @*_
-- @Z\*m
-- @*鑫
-- @c\*y
-- @\*昕
-- [@witsice](https://github.com/witsice)
-- @b\*g
-- @\*亿
-- @\*辉
-- @JACK 
-- @\*光
-- @W\*l
-- [@kesku](https://github.com/kesku)
-- [@biguncle](https://github.com/biguncle)
-- @二吉吉
-- @a\*g
-- @\*林
-- @\*咸
-- @\*明
-- @S\*y
-- @f\*o
-- @\*智
-- @F\*t
-- @r\*c
-- [@qierkang](http://github.com/qierkang)
-- @\*军
-- [@snrise-z](http://github.com/snrise-z)
-- @\*王
-- [@greatheart1000](http://github.com/greatheart1000)
-- @\*王
-- @zcutlip
-- [@Peng-YM](http://github.com/Peng-YM)
-- @\*更
-- @\*.
-- @F\*t
-- @\*政
-- @\*铭
-- @\*叶
-- @七\*o
-- @\*青
-- @\*\*晨
-- @\*远
-- @\*霄
-- @\*\*吉
-- @\*\*飞
-- @\*\*驰
-- @x\*g
-- @\*\*东
-- @\*落
-- @哆\*k
-- @\*涛
-- [@苗大](https://github.com/WitMiao)
-- @\*呢
-- @\d*u
-- @crizcraig
-- s\*s
-- \*火
-- \*勤
-- \*\*锟
-- \*涛
-- \*\*明
-- \*知
-- \*语
-- \*瓜
-
-（如果您的名字被屏蔽，请通过我的主页电子邮件与我联系，以便使用您的 GitHub 用户名进行更新。）
-
-
-## 交流群
-<img src="/blog/images/wechat_group.jpg" width="200" alt="wechat_group" />

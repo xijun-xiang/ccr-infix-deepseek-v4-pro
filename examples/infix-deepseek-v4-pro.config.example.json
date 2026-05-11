@@ -1,0 +1,19 @@
+{
+  "Providers": [
+    {
+      "name": "infix",
+      "api_base_url": "https://proxy.infix-ai.xyz/v1/chat/completions",
+      "api_key": "$ANTHROPIC_AUTH_TOKEN",
+      "models": ["deepseek-v4-pro"],
+      "transformer": {
+        "use": ["infix"]
+      }
+    }
+  ],
+  "Router": {
+    "default": "infix,deepseek-v4-pro",
+    "background": "infix,deepseek-v4-pro",
+    "think": "infix,deepseek-v4-pro",
+    "longContext": "infix,deepseek-v4-pro"
+  }
+}

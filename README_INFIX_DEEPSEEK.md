@@ -18,7 +18,8 @@ The `infix` transformer:
 - Adds a small `reasoning_content` placeholder for assistant tool-call history if Claude Code drops the previous thinking block.
 - Strips Claude Code's volatile leading `x-anthropic-billing-header` from system prompts to improve prompt-cache stability.
 - Removes Anthropic-only thinking request fields before sending requests to the OpenAI-compatible endpoint.
-- Caps `max_tokens` to DeepSeek's 8192 response-token limit.
+- Caps `max_tokens` to a configurable safety limit. This branch defaults to `16000`.
+- Sends `output_config.effort=max` by default for Infix DeepSeek V4 Pro.
 - Optionally disables Claude Code's broken built-in `WebSearch`/`WebFetch` for this route and steers the model to local MCP web tools.
 
 ## Configuration
@@ -49,7 +50,9 @@ Example:
             {
               "webToolsMode": "mcp",
               "replayPlaceholderReasoning": true,
-              "stripBillingHeader": true
+              "stripBillingHeader": true,
+              "maxOutputTokens": 16000,
+              "defaultEffort": "max"
             }
           ]
         ]
@@ -73,6 +76,11 @@ setx ANTHROPIC_AUTH_TOKEN "your-infix-api-key"
 ```
 
 Restart your terminal after `setx`.
+
+Transformer options:
+
+- `maxOutputTokens`: caps oversized Claude Code `max_tokens` requests. The default is `16000`.
+- `defaultEffort`: defaults to `"max"` and is sent as `output_config.effort`. Set it to `"none"` if your provider rejects that field.
 
 ## Local Web Tools
 

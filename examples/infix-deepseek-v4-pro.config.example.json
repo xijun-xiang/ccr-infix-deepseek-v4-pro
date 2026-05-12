@@ -12,7 +12,9 @@
             {
               "webToolsMode": "mcp",
               "replayPlaceholderReasoning": true,
-              "stripBillingHeader": true
+              "stripBillingHeader": true,
+              "maxOutputTokens": 16000,
+              "defaultEffort": "max"
             }
           ]
         ]

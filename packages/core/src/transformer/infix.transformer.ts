@@ -20,6 +20,8 @@ export class InfixTransformer implements Transformer {
   private readonly webToolsMode: "off" | "mcp" | "bash";
   private readonly replayPlaceholderReasoning: boolean;
   private readonly stripBillingHeader: boolean;
+  private readonly maxOutputTokens: number;
+  private readonly defaultEffort?: string;
 
   constructor(options?: TransformerOptions) {
     const mode = options?.webToolsMode ?? options?.webTools ?? "off";
@@ -28,12 +30,24 @@ export class InfixTransformer implements Transformer {
     this.replayPlaceholderReasoning =
       options?.replayPlaceholderReasoning !== false;
     this.stripBillingHeader = options?.stripBillingHeader !== false;
+    const maxOutputTokens = Number(options?.maxOutputTokens ?? 16000);
+    this.maxOutputTokens =
+      Number.isFinite(maxOutputTokens) && maxOutputTokens > 0
+        ? maxOutputTokens
+        : 16000;
+    const defaultEffort = options?.defaultEffort ?? options?.effort ?? "max";
+    this.defaultEffort =
+      typeof defaultEffort === "string" && defaultEffort !== "none"
+        ? defaultEffort
+        : undefined;
   }
 
   async transformRequestIn(request: UnifiedChatRequest): Promise<UnifiedChatRequest> {
-    if (request.max_tokens && request.max_tokens > 8192) {
-      request.max_tokens = 8192;
+    if (request.max_tokens && request.max_tokens > this.maxOutputTokens) {
+      request.max_tokens = this.maxOutputTokens;
     }
+
+    this.applyDefaultEffort(request);
 
     if (this.stripBillingHeader) {
       this.stripVolatileSystemPrefixes(request);
@@ -75,6 +89,25 @@ export class InfixTransformer implements Transformer {
     delete (request as any).enable_thinking;
 
     return request;
+  }
+
+  private applyDefaultEffort(request: UnifiedChatRequest) {
+    const req = request as any;
+    const existingEffort =
+      req.output_config?.effort ||
+      req.reasoning_effort ||
+      request.reasoning?.effort;
+    const effort =
+      typeof existingEffort === "string" && existingEffort !== "none"
+        ? existingEffort
+        : this.defaultEffort;
+
+    if (!effort) return;
+
+    req.output_config = {
+      ...(req.output_config || {}),
+      effort,
+    };
   }
 
   private stripVolatileSystemPrefixes(request: UnifiedChatRequest) {

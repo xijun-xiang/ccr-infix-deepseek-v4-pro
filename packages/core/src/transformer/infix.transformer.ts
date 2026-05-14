@@ -30,11 +30,11 @@ export class InfixTransformer implements Transformer {
     this.replayPlaceholderReasoning =
       options?.replayPlaceholderReasoning !== false;
     this.stripBillingHeader = options?.stripBillingHeader !== false;
-    const maxOutputTokens = Number(options?.maxOutputTokens ?? 16000);
+    const maxOutputTokens = Number(options?.maxOutputTokens ?? 32768);
     this.maxOutputTokens =
       Number.isFinite(maxOutputTokens) && maxOutputTokens > 0
         ? maxOutputTokens
-        : 16000;
+        : 32768;
     const defaultEffort = options?.defaultEffort ?? options?.effort ?? "max";
     this.defaultEffort =
       typeof defaultEffort === "string" && defaultEffort !== "none"
